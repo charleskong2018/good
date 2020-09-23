@@ -2,7 +2,9 @@
 	"name": "charles_approve",
 	"properties": {
 		"description": "approve",
-		"annotations": [],
+		"annotations": [
+			"LS_Azure_good"
+		],
 		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
@@ -10,7 +12,7 @@
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 1,
-				"startTime": "2020-09-23T16:06:00Z",
+				"startTime": "2020-09-23T16:06:00.000Z",
 				"timeZone": "UTC"
 			}
 		}
