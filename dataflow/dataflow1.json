@@ -12,9 +12,21 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
-			"script": "source(output(\n\t\tCountry as string,\n\t\tAge as string,\n\t\tSalary as string,\n\t\tPurchased as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1"
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "output_employee",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterCountry"
+				}
+			],
+			"script": "source(output(\n\t\tCountry as string,\n\t\tAge as string,\n\t\tSalary as string,\n\t\tPurchased as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 filter(Country=='France') ~> FilterCountry\nFilterCountry sink(input(\n\t\tCountry as string,\n\t\tAge as integer,\n\t\tSalary as decimal(19,2),\n\t\tPurchased as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
